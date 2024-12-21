@@ -1,17 +1,15 @@
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for all origins
 app.use(cors());
 
-// Proxy route for ORCID API
 app.get("/api/orcid/:orcidId", async (req, res) => {
   const { orcidId } = req.params;
-  const token = req.headers.authorization; // Pass token from frontend
+  const token = req.headers.authorization;
 
   if (!token) {
     return res.status(401).json({ error: "Authorization token is required" });
